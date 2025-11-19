@@ -1,0 +1,260 @@
+pushing to local git 
+
+1. cd path/to/cookbook		Open terminal (or Git Bash) and navigate to the folder
+2. git init			Initialize a new Git repository. This will create a hidden .git folder inside cookbook
+3. git status			Check the status (optional, just to confirm)
+4. git add .			Add your files to the staging area (. means add all files in this folder.)
+
+5. git commit -m "Initial commit - added cookbook project"		Commit your changes
+
+pushing to remote repository(via SSH key) if already generated once on the same machine
+
+*. ls ~/.ssh			To check if you already have a key
+*. ssh -T git@github.com	To test with GitHub. If it says “Hi chiraggivan! You’ve successfully authenticated…”, you’re 
+*. git remote -v		To check what remote URL your repo is using.(https or SSH)
+
+*. git remote set-url origin git@github.com:chiraggivan/the-cookbook.git		switch to SSH if the above shows https//... 
+*. git push -u origin main	Now it will push to remote repository
+
+new update/add/delete files from the local git to remote repo
+
+git status
+git add .
+git commit -m "some message"
+git push			Since you already did git push -u origin main once, now git push alone is enough.
+
+
+
+
+
+
+
+
+
+
+SHOW PROCESSLIST;
+
+show triggers;
+DROP TRIGGER [IF EXISTS] [schema_name.]trigger_name;
+
+SHOW PROCEDURE STATUS where Db = 'cookbook_db';
+CALL insert_unit_with_related(19, 'pc', 0.130000, TRUE);
+CALL insert_unit_with_related(20, 'cup', 0.175000, TRUE);
+
+CALL update_insert_user_price(3,2,1.25,1,'l','iceland')
+CALL populate_dish_ingredients(1,1,'default_price');
+
+DROP PROCEDURE IF EXISTS update_insert_user_price;
+DROP PROCEDURE IF EXISTS insert_units_depending_on_base_unit;
+DROP PROCEDURE IF EXISTS delete_recipe;
+
+select u.unit_id, u.ingredient_id, i.name, u.unit_name
+from units u, ingredients i
+where u.ingredient_id = i.ingredient_id
+order by u.ingredient_id
+
+SELECT us.user_id as user,i.ingredient_id as id,i.name, ri.quantity, u.unit_name, ri.quantity*i.default_price*u.conversion_factor AS price, i.default_price as cost, i.base_unit as unit
+FROM ingredients i, recipe_ingredients ri, units u, recipes r, users us
+WHERE i.ingredient_id = u.ingredient_id
+AND u.unit_id = ri.unit_id
+AND ri.recipe_id = r.recipe_id
+AND us.user_id = r.user_id
+AND r.recipe_id = 1
+AND ri.is_active = TRUE
+AND us.user_id = 2;
+
+INSERT INTO dishes (user_id, recipe_id, preparation_date, total_cost, is_active, created_at) VALUES
+(2, 1, '2025-08-07', 1.4219, TRUE, CURRENT_TIMESTAMP);
+
+INSERT INTO dish_ingredients (dish_id, ingredient_id, quantity, unit_name, unit_price, total_ingredient_cost, source, base_price, base_unit) VALUES
+(1, 1, 0.500, 'kg', 1.20, 0.60, 'user_price'), 
+(1, 2, 0.200, 'kg', 1.70, 0.34, 'default_price'); 
+
+
+In deep pan add oil and ginger garlic paste. stir and cook it for half a minute.
+Add tomato puree in the deep pan. 
+add turmeric powder, dhana jeera power, chilli powder. cook the gravy till it about to boil.
+add diced potatoes with skin removed and peas int the gravy.
+Add water in the pan to make the gravy a bit runny.
+cook for 10 mins on slow medium flame.
+in a separate bowl take wheat flour and add hot water in it. make a thick paste of it.
+add the paste in the pan, stir it till the paste is completely dissolved with gravy. 
+slow cook for furture 5 mins.
+check the consistency of the gravy and decide to add water or cook for few more minutes.
+turn of gas and add ghee and garam masala and mix it properly.
+
+INSERT INTO recipe_procedures (recipe_id, step_order, step_text, estimated_time, is_active, created_at)
+VALUES
+    (1, 1, 'In a deep pan, heat oil over medium heat. Add ginger-garlic paste and stir-fry for 30 seconds until fragrant.',60, TRUE, CURRENT_TIMESTAMP),
+    (1, 2, 'Pour tomato puree into the pan and stir to combine with the paste.',15, TRUE, CURRENT_TIMESTAMP),
+    (1, 3, 'Add turmeric powder, dhana jeera (coriander-cumin) powder, and chili powder. Cook, stirring occasionally, until the mixture begins to simmer.',180, TRUE, CURRENT_TIMESTAMP),
+    (1, 4, 'Add diced potatoes (peeled) and green peas to the pan. Stir to coat with the spiced puree.',60, TRUE, CURRENT_TIMESTAMP),
+    (1, 5, 'Add water to achieve a slightly runny gravy. Stir well.',0, TRUE, CURRENT_TIMESTAMP),
+    (1, 6, 'Cook on low-medium heat for 10 minutes, stirring occasionally, until potatoes are tender.',600, TRUE, CURRENT_TIMESTAMP),
+    (1, 7, 'In a small bowl, mix wheat flour with hot water to form a thick, smooth paste.',0, TRUE, CURRENT_TIMESTAMP),
+    (1, 8, 'Add the flour paste to the pan and stir continuously until fully dissolved into the gravy.',120, TRUE, CURRENT_TIMESTAMP),
+    (1, 9, 'Simmer for an additional 5 minutes on low heat to blend flavours.',300, TRUE, CURRENT_TIMESTAMP),
+    (1, 10, 'Assess the gravy’s thickness. Add more water if too thick, or cook for a few more minutes if too runny.',0, TRUE, CURRENT_TIMESTAMP),
+    (1, 11, 'Turn off the heat. Stir in ghee and garam masala until well combined.',0, TRUE, CURRENT_TIMESTAMP); 
+
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity, unit_id, is_active, created_at) VALUES
+(1, 2, 2, 4, TRUE, CURRENT_TIMESTAMP),
+(1, 4, 1, 15, TRUE, CURRENT_TIMESTAMP),
+(1, 5, 1.5, 32, TRUE, CURRENT_TIMESTAMP),
+(1, 3, 1, 9, TRUE, CURRENT_TIMESTAMP),
+(1, 6, 1, 35, TRUE, CURRENT_TIMESTAMP),
+(1, 7, 1, 38, TRUE, CURRENT_TIMESTAMP),
+(1, 12, 1, 47, TRUE, CURRENT_TIMESTAMP),
+(1, 13, 1, 60, TRUE, CURRENT_TIMESTAMP),
+(1, 8, 2, 53, TRUE, CURRENT_TIMESTAMP),
+(1, 9, 0.5, 41, TRUE, CURRENT_TIMESTAMP),
+(1, 11, 2, 44, TRUE, CURRENT_TIMESTAMP),
+(1, 10, 1, 51, TRUE, CURRENT_TIMESTAMP),
+(1, , , , TRUE, CURRENT_TIMESTAMP),
+
+('', '', 0.00, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+INSERT INTO ingredients (name, base_unit, default_price, is_active, submitted_by, approval_status, created_at, notes) 
+VALUES 
+('red onion', 'kg', 1.10, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('black chana', 'kg', 1.80, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('chaat masala', 'kg', 14.00, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('coriander', 'bunch', 0.80, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('hing', 'kg', 25.00, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('potatoes', 'kg', 0.68, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('cabbage', 'pc', 0.80, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('green chilli paste', 'kg', 10.00, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('tomatoes', 'kg', 1.79, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('dhana jeera powder', 'kg', 7.00, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('red chilli reshampatti powder', 'kg', 6.00, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('red chilli kashmiri powder', 'kg', 9.00, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('peas', 'kg', 1.55, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('garam masala', 'kg', 1.30, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('ghee', 'kg', 12.00, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL),
+('salt', 'kg', 1.40, TRUE, NULL, 'approved', CURRENT_TIMESTAMP, NULL);
+
+
+
+
+INSERT INTO user_prices (user_id, ingredient_id, custom_price, quantity, base_unit, place)
+VALUES (2,2,1.75,1,'litre','local')
+
+INSERT INTO units (ingredient_id, unit_name, conversion_factor, is_active, created_at)
+VALUES(18, 'bunch', 1.000000, TRUE, CURRENT_TIMESTAMP)
+
+INSERT INTO units (ingredient_id, unit_name, conversion_factor, is_active, created_at) VALUES
+(5, 'pc', 0.170000, TRUE, CURRENT_TIMESTAMP);
+
+INSERT INTO recipes (user_id, name, portion_size, description, privacy, is_active, created_at) VALUES
+(2, 'Aloo Mutter', '4 people', 'Aloo mutter in a thick tomato gravy sauce', 'public', TRUE, CURRENT_TIMESTAMP)
+
+SELECT 
+    us.user_id AS user,
+    i.ingredient_id AS id,
+    i.name,
+    ri.quantity,
+    u.unit_name,
+    ri.quantity * COALESCE(up.custom_price, i.default_price) * u.conversion_factor AS price,
+    COALESCE(up.custom_price, i.default_price) AS cost,
+    COALESCE(up.base_unit, i.base_unit) AS unit
+FROM users us
+JOIN recipes r ON us.user_id = r.user_id
+JOIN recipe_ingredients ri ON r.recipe_id = ri.recipe_id
+JOIN ingredients i ON ri.ingredient_id = i.ingredient_id
+JOIN units u ON ri.unit_id = u.unit_id
+LEFT JOIN user_prices up ON up.user_id = us.user_id 
+    AND up.ingredient_id = i.ingredient_id 
+    AND up.is_active = TRUE
+WHERE r.recipe_id = 1
+AND us.user_id = 2
+AND ri.is_active = TRUE;
+
+
+I would like to now add an endpoint for update of recipe using PATCH. Update can be of name of recipe, portion, privacy, description or removing , adding or updating ingredients. So while updating name or portion we will check the constraints so there are 2 recipe name and portion of same value. description is fine if null. ingredients can be added. updating ingredients can now be using custom_price and units to be taken care of. deleting an ingredient and then adding same ingredient should be handled accordingly.  
+
+SELECT 
+                i.ingredient_id, i.name,
+                ri.recipe_ingredient_id, ri.quantity,
+                u.unit_name, u.unit_id,
+                ri.quantity * COALESCE(up.custom_price, i.default_price) * u.conversion_factor AS price,
+                COALESCE(up.custom_price, i.default_price) AS cost,
+                COALESCE(up.base_unit, i.base_unit) AS unit
+            FROM recipe_ingredients ri 
+            JOIN ingredients i ON ri.ingredient_id = i.ingredient_id
+            JOIN units u ON ri.unit_id = u.unit_id
+            LEFT JOIN user_prices up ON up.user_id = 3 
+                AND up.ingredient_id = i.ingredient_id 
+                AND up.is_active = TRUE
+            WHERE ri.recipe_id = 8
+            AND ri.is_active = TRUE
+
+SELECT i.ingredient_id,
+       COALESCE(up.custom_price, i.default_price) AS price,
+       i.base_unit
+FROM ingredients i
+LEFT JOIN user_prices up
+  ON i.ingredient_id = up.ingredient_id 
+ AND up.user_id = %s
+ AND up.is_active = 1
+WHERE i.ingredient_id = %s
+  AND i.is_active = 1;
+
+
+
+data = request.get_json()
+                        
+        name = data['name']
+        price = data['price']
+        unit = data['unit']
+        quantity = data['quantity']
+
+        # normalise data for 1 unit kg
+        if unit IN ['g', 'kg']:
+            if unit == 'g':
+                new_quantity = quantity/1000
+                new_unit = 'kg'
+            else:
+                new_quantity = quantity
+                new_unit = 'kg'
+
+            if new_quantity != 1 :
+                new_price = price/new_quantity
+            else:
+                new_price = price
+
+testing data  for create recipe 
+ 
+{
+    "name": "Fried peanuts",
+    "portion_size": "2 people",
+    "privacy" : "public",
+    "description" : "",
+    
+    "ingredients": [
+        {
+            "ingredient_id": 35,
+            "quantity": 1,
+            "unit_id": 118,
+            "base_unit":"kg",
+            "base_price": 4.18,
+            "custom_price": 4.18,
+            "custom_quantity": 1,
+            "unit_supplied":"kg",
+            "location":""
+            
+        },
+        {
+            "ingredient_id": 2,
+            "quantity": 2,
+            "unit_id": 4,
+            "base_unit":"     kg       ",
+            "base_price": 2.09,
+            "custom_price": 3.50,
+            "custom_quantity": 2,
+            "unit_supplied":"   oz ",
+            "location":""
+            
+        }
+    ]
+}
+
+
